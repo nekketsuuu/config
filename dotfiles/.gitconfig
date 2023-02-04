@@ -1,0 +1,28 @@
+[core]
+	editor = "nano"
+	excludesfile = ~/.gitignore
+[user]
+	name = nekketsuuu
+	email = nekketsuuu@users.noreply.github.com
+[ghq]
+	root = ~/dev/src
+[push]
+	default = simple
+[alias]
+	branches = branch -a
+	tags = tag
+	stashes = stash list
+	unstage = reset -q HEAD --
+	discard = checkout --
+	uncommit = reset --mixed HEAD~
+	last = log -1 HEAD --format=format:"%Cred%H"
+	graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
+	history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
+	precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
+[pull]
+	rebase = false
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
