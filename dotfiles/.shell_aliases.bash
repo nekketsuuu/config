@@ -6,6 +6,10 @@ alias open='gnome-open'
 alias v='gh repo view -w'
 
 # Utilities
+alias ls='ls -G'
+alias la='ls -aG'
+alias l='ls -CFG'
+alias grep='grep --color=auto'
 alias cdb='cd "$(ghq root)/bitbucket.org/"'
 alias cdbn='cd "$(ghq root)/bitbucket.org/nekketsuuu/"'
 alias cdg='cd "$(ghq root)/github.com/"'
