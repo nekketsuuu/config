@@ -16,7 +16,7 @@ alias cdg='cd "$(ghq root)/github.com/"'
 alias cdgn='cd "$(ghq root)/github.com/nekketsuuu/"'
 alias g='cd "$(ghq root)/$(ghq list | peco)"'
 alias quit='exit'
-alias rm='rm -I'
+alias rm='rm -i'
 alias untar='tar xvf'
 
 # Emacs
