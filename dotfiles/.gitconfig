@@ -14,6 +14,9 @@
 	graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
 	last = log -1 HEAD --format=format:"%Cred%H"
+	m = !git switch \"$(git symbolic-ref refs/remotes/origin/HEAD | cut -d/ -f4)\"
+	main = !git m
+	master = !git m
 	precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
 	stashes = stash list
 	tags = tag
