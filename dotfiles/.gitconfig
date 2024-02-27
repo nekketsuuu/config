@@ -10,19 +10,19 @@
 	default = simple
 [alias]
 	branches = branch -a
-	tags = tag
-	stashes = stash list
-	unstage = reset -q HEAD --
 	discard = checkout --
-	uncommit = reset --mixed HEAD~
-	last = log -1 HEAD --format=format:"%Cred%H"
 	graph = log --graph -10 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
 	history = log -10 --format=format:'%Cgreen%h %Creset• %s (%cN, %ar)'
+	last = log -1 HEAD --format=format:"%Cred%H"
 	precommit = diff --cached -w --word-diff=color --word-diff-regex='[^[:space:]<>]+'
+	stashes = stash list
+	tags = tag
+	uncommit = reset --mixed HEAD~
+	unstage = reset -q HEAD --
 [pull]
 	rebase = false
 [filter "lfs"]
-	smudge = git-lfs smudge -- %f
+	clean = git-lfs clean -- %f
 	process = git-lfs filter-process
 	required = true
-	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
