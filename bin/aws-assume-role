@@ -2,6 +2,7 @@
 
 # :thanks-sorah: https://github.com/sorah/config/blob/master/bin/sorah-aws-assume-role
 
+require 'etc'
 require 'aws-sdk-s3' # Workaround of load failure
 require 'aws-sdk-sts'
 
@@ -12,7 +13,8 @@ end
 quiet = ARGV.delete('-q')
 mfa = ARGV.delete('--mfa')
 arn = ARGV.shift
-session_name = "#$USER-#{Time.now.to_i}"
+user = ENV['USER'] || Etc.getpwuid(Process.uid).name
+session_name = user
 
 @sts = Aws::STS::Client.new(region: 'us-east-1')
 def identity
