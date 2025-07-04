@@ -12,6 +12,15 @@
 #
 # The args are passed to the Claude Code CLI.
 
+# I used the following pages to learn about sandbox-exec. Thank you all:
+#
+# - https://blog.syum.ai/entry/2025/04/27/232946
+# - https://mybyways.com/blog/run-code-in-a-macos-sandbox
+# - https://github.com/Homebrew/brew/blob/a36f8af593df2c23a19e66f11b23a9adc51b18de/Library/Homebrew/sandbox.rb
+# - https://github.com/openai/codex/blob/abcca30d93d89197405ec56782e146f7a776297d/codex-cli/src/utils/agent/sandbox/macos-seatbelt.ts
+# - https://github.com/google-gemini/gemini-cli/blob/9ff3592e01b8f7cd2c30d35b65ee132c37631bc6/packages/cli/src/utils/sandbox-macos-restrictive-open.sb
+# - https://reverse.put.as/wp-content/uploads/2011/09/Apple-Sandbox-Guide-v1.0.pdf
+
 require "tmpdir"
 
 # Policy for sandbox-exec.
