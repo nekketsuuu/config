@@ -70,6 +70,7 @@ POLICY = <<~POLICY
   ; For Claude Code and languages
   (allow file-write*
     (literal "#{File.join(ENV.fetch("HOME"), ".claude.json")}")
+    (literal "#{File.join(ENV.fetch("HOME"), ".yarnrc")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".bundle")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".cache")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".cargo")}")
@@ -79,8 +80,7 @@ POLICY = <<~POLICY
     (subpath "#{File.join(ENV.fetch("HOME"), ".rbenv")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".rustup")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".volta")}")
-    (subpath "#{File.join(ENV.fetch("HOME"), ".yarn")}")
-    (subpath "#{File.join(ENV.fetch("HOME"), ".yarnrc")}"))
+    (subpath "#{File.join(ENV.fetch("HOME"), ".yarn")}"))
 
   ; The network filter is based on IP addresses; we cannot filter the network by domain names
   ; (according to the reverse engineering PDF)
