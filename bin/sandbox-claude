@@ -68,6 +68,10 @@ POLICY = <<~POLICY
 
   (allow file-read*)
 
+  ; XXX: By disabling read access to ssh keys, we can't run `git push` for ssh origins.
+  ; Possible workaround: How about using an independent MCP server for git operations?
+  (deny file-read* (subpath "#{File.join(ENV.fetch("HOME"), ".ssh")}"))
+
   (allow process-exec)
   (allow process-fork)
 
