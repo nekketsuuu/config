@@ -1,0 +1,32 @@
+#!/bin/bash
+
+set -eu -o pipefail
+
+if [ $# -eq 0 ]
+then
+  echo "Usage: $0 <command> [args...]"
+  exit 1
+fi
+
+echo "Waiting for user confirmation..."
+
+response="$(osascript <<EOF
+  try
+    display dialog "Is it OK to run the following?:\n$@" \
+      with title "Confirmation" \
+      buttons {"Cancel", "OK"} \
+      default button "OK"
+    return button returned of result
+  on error
+    return "Cancel"
+  end try
+EOF
+)"
+
+if [ "x$response" != "xOK" ]
+then
+  echo "Warn: Aborted by user." >/dev/stderr
+  exit 1
+fi
+
+exec "$@"
