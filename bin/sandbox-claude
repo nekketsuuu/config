@@ -40,14 +40,14 @@ POLICY = <<~POLICY
   ; XXX: Is this working?
   ;
   ; It seems that, despite this config, the denied logs are still collected.
-  ; Console.app or `log stream --style compact --predicate 'sender=="Sandbox"'` shows the logs.
+  ; The logs are shown in Console.app or `log stream --style compact --predicate 'sender=="Sandbox"'`.
   (debug deny)
 
   (deny default)
 
   ; /System/Library/Sandbox/Profiles/system.sb
-  ; It appears that this is the basic policy for applications (actually this is imported from application.sb)
-  ; Especially, it allows to write for /dev/null and to run sysctl-read (some features of sysctl is required to run Claude Code).
+  ; It appears that this is a basic policy for applications (actually this is imported from application.sb)
+  ; Especially, it allows to write to /dev/null and to run sysctl-read (some features of sysctl is required to run Claude Code).
   (import "system.sb")
 
   (allow file-read*)
@@ -82,11 +82,11 @@ POLICY = <<~POLICY
     (subpath "#{File.join(ENV.fetch("HOME"), ".volta")}")
     (subpath "#{File.join(ENV.fetch("HOME"), ".yarn")}"))
 
-  ; The network filter is based on IP addresses; we cannot filter the network by domain names
-  ; (according to the reverse engineering PDF)
+  ; It appears that the network filter can be used only like `localhost:*` or `*:443`,
+  ; especially we cannot filter the network by domain names, according to the reverse engineering PDF
   (allow network-outbound)
 
-  ; Intentionally allow binds besides localhost in order to utilize Docker networks
+  ; In order to utilize the Docker network, intentionally allow binds not only to localhost
   (allow network-bind)
 
   ; Allow terminal access for React Ink
@@ -101,7 +101,7 @@ POLICY = <<~POLICY
   ; rustup needs the following
   (allow mach-lookup (global-name "com.apple.SystemConfiguration.configd"))
 
-  ; Some Rust programs require the followings for TLS certificates
+  ; Some Rust programs require the following for TLS certificates
   (allow system-socket
     (require-all
       (socket-domain 32) ; PF_SYSTEM / AF_SYSTEM
