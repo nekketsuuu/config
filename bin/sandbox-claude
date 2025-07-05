@@ -22,6 +22,21 @@
 # - https://reverse.put.as/wp-content/uploads/2011/09/Apple-Sandbox-Guide-v1.0.pdf
 
 require "tmpdir"
+require "open3"
+
+# To allow writing to the parent .git directory even if the current directory is in a git sub-worktree
+def git_common_dir
+  return @git_common_dir if defined?(@git_common_dir)
+
+  # https://git-scm.com/docs/git-worktree#_details
+  #
+  # > Each linked worktree has a private sub-directory in the repository’s $GIT_DIR/worktrees directory.
+  # > ...
+  # > Within a linked worktree, $GIT_DIR is set to point to this private directory (e.g. /path/main/.git/worktrees/test-next
+  # > in the example) and $GIT_COMMON_DIR is set to point back to the main worktree’s $GIT_DIR (e.g. /path/main/.git).
+  output, status = Open3.capture2("git", "rev-parse", "--git-common-dir")
+  @git_common_dir = status.success? ? File.expand_path(output.chomp) : nil
+end
 
 # Policy for sandbox-exec.
 #
@@ -64,6 +79,7 @@ POLICY = <<~POLICY
     (literal "/dev/stdout"))
   (allow file-write*
     (subpath "#{Dir.pwd}")
+    #{git_common_dir ? "(subpath \"#{git_common_dir}\")" : ""}
     (subpath "/private/tmp")
     (subpath "/private/var/tmp")
     (regex #"^/private/var/folders/[^/]+/[^/]+/[C,T]"))
