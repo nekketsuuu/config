@@ -104,8 +104,11 @@ POLICY = <<~POLICY
   (allow network-outbound)
 
   ; In order to utilize the Docker network, intentionally allow binds not only to localhost,
-  ; but also to all local network interfaces and all UNIX sockets, which might be risky when network-inbound is allowed
+  ; but also to all local network interfaces and all UNIX sockets
   (allow network-bind)
+
+  ; For local servers such as developing Rails servers or Mairu
+  #{ENV.fetch("ALLOW_NETWORK_INBOUND", "0") == "1" ? "" : ";"}(allow network-inbound (local udp) (local tcp))
 
   ; Allow terminal access for React Ink
   (allow file-ioctl (regex #"^/dev/tty.*"))
