@@ -6,6 +6,10 @@
 	email = nekketsuuu@users.noreply.github.com
 [ghq]
 	root = ~/dev/src
+[gpg]
+	format = ssh
+[gpg "ssh"]
+	defaultKeyCommand = git-ssh-default-key
 [push]
 	default = simple
 [alias]
