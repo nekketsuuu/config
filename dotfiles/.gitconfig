@@ -21,6 +21,8 @@
 	tags = tag
 	uncommit = reset --mixed HEAD~
 	unstage = reset -q HEAD --
+	# The trailing hash symbol is for ignoring the given argument
+	wt = "![ \"x$#\" == \"x1\" ] && git worktree add -b \"$1\" \"$(git rev-parse --git-common-dir)/../.worktrees/$1\" && cd \"$(git rev-parse --git-common-dir)/../.worktrees/$1/$(git rev-parse --show-prefix)\" #"
 [pull]
 	rebase = false
 [filter "lfs"]
@@ -28,3 +30,5 @@
 	process = git-lfs filter-process
 	required = true
 	smudge = git-lfs smudge -- %f
+[init]
+	defaultBranch = main

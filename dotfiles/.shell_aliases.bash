@@ -3,7 +3,6 @@
 # local softwares
 alias dynamodb-local='docker run --rm -p 8000:8000 amazon/dynamodb-local'
 alias open='gnome-open'
-alias v='gh repo view -w'
 
 # Utilities
 alias ls='ls -G'
@@ -18,6 +17,22 @@ alias g='cd "$(ghq root)/$(ghq list | peco)"'
 alias quit='exit'
 alias rm='rm -i'
 alias untar='tar xvf'
+alias gitroot='cd "$(git rev-parse --git-common-dir)/.."'
+
+wt() {
+  if [ "x$#" != "x1" ]
+  then
+    echo "Usage: wt <new-branch>"
+    exit 1
+  fi
+
+  git worktree add -b "$1" "$(git rev-parse --git-common-dir)/../.worktrees/$1" && \
+    cd "$(git rev-parse --git-common-dir)/../.worktrees/$1/$(git rev-parse --show-prefix)"
+}
+
+ge() {
+  gem install rubocop ruby-lsp solargraph
+}
 
 # Emacs
 alias emacsclient='TERM=xterm emacsclient' # to modify color (default: xterm-256color)

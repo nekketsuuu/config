@@ -1,13 +1,15 @@
 #!/usr/bin/env bash
 
-export PROMPT_COMMAND='history -a'
+# Save history immediately
+[[ -n "$BASH_VERSION" ]] && export PROMPT_COMMAND='history -a'
+[[ -n "$ZSH_VERSION" ]] && setopt SHARE_HISTORY INC_APPEND_HISTORY
 
 # Go
 export GOPATH="$HOME/dev"
 export PATH="$GOPATH/bin:$PATH"
 
 # OCaml
-eval "$(opam env)"
+#eval "$(opam env)"
 
 # PROMPT
 _P () {
