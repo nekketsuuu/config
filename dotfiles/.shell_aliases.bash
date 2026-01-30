@@ -4,6 +4,10 @@
 alias dynamodb-local='docker run --rm -p 8000:8000 amazon/dynamodb-local'
 alias open='gnome-open'
 
+ge() {
+  gem install rubocop ruby-lsp solargraph
+}
+
 # Utilities
 alias ls='ls -G'
 alias la='ls -aG'
@@ -28,10 +32,6 @@ wt() {
 
   git worktree add -b "$1" "$(git rev-parse --git-common-dir)/../.worktrees/$1" && \
     cd "$(git rev-parse --git-common-dir)/../.worktrees/$1/$(git rev-parse --show-prefix)"
-}
-
-ge() {
-  gem install rubocop ruby-lsp solargraph
 }
 
 # Emacs
