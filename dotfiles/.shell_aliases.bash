@@ -9,7 +9,6 @@ ge() {
 }
 
 # Utilities
-alias ls='ls -G'
 alias la='ls -aG'
 alias l='ls -CFG'
 alias grep='grep --color=auto'
