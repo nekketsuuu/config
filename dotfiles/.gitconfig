@@ -1,4 +1,5 @@
 [core]
+	autocrlf = input
 	editor = "nano"
 	excludesfile = ~/.gitignore
 [user]
