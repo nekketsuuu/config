@@ -10,8 +10,8 @@ set -eu -o pipefail
 if [ -z "$domain" ]
 then
   url="$(git remote get-url origin)"
-  # SSH format: ssh://git@github.com/repo.git → github.com
-  domain=$(echo "$url" | grep -E 'ssh://' | sed 's|.*@\([^/]*\)/.*|\1|' || true)
+  # SSH format: ssh://git@github.com/repo.git or git@github.com:nekketsuuu/repo.git → github.com
+  domain=$(echo "$url" | grep -E 'git@' | sed 's|.*@\([^/:]*\).*|\1|' || true)
   if [ -z "$domain" ]
   then
     # HTTPS format: https://github.com/user/repo.git → github.com
