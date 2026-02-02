@@ -11,6 +11,10 @@
 	format = ssh
 [gpg "ssh"]
 	defaultKeyCommand = git-ssh-default-key
+[commit]
+	gpgSign = true
+[tag]
+	gpgSign = true
 [push]
 	default = simple
 [alias]
