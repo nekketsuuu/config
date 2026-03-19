@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# Save history immediately
-[[ -n "$BASH_VERSION" ]] && export PROMPT_COMMAND='history -a'
-[[ -n "$ZSH_VERSION" ]] && setopt SHARE_HISTORY INC_APPEND_HISTORY
-
 # Go
 export GOPATH="$HOME/dev"
 export PATH="$GOPATH/bin:$PATH"
