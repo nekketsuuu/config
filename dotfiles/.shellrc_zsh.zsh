@@ -17,8 +17,8 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-  export PS1=$'%{\033[01;32m%}%n$(_H "%m")%{\033[00m%}:%{\033[01;34m%}$(_P "$(print -P %~)" 30)%{\033[00m%}%{\033[01;33m%}$(_F)%{\033[00m%}\%# '
+  export PS1=$'%{\033[01;32m%}%n$(_H "$(print -P %m)")%{\033[00m%}:%{\033[01;34m%}$(_P "$(print -P %~)" 30)%{\033[00m%}%{\033[01;33m%}$(_F)%{\033[00m%}\%# '
 else
-  export PS1='%n$(_H "%m"):$(_P "$(print -P %~)" 30)$(_F)%# '
+  export PS1='%n$(_H "$(print -P %m)"):$(_P "$(print -P %~)" 30)$(_F)%# '
 fi
 unset color_prompt force_color_prompt
